@@ -1,5 +1,5 @@
-# AnsibleServer
-Useful Ansible Playbook for install and config famous server services in Linux Operating Systems
+# AnsibleForServer
+Ansible Playbook for install and config famous server services in Linux Operating Systems
 services:
 - nfs
 - csf firewall
@@ -7,6 +7,7 @@ services:
 - samba
 - nginx
 - postfix
+- vsftpd
 
 # warning
 - This plybook has been tested successfully on Redhat base systems like centos and fedora 
@@ -25,5 +26,5 @@ services:
 - [x] write Samba Auto bash script
 - [ ] Test and trouble shoot on Debian systems
 - [ ] Add more services
-- [ ] improve playbook
+- [ ] improve playbooks syntax
 - [x] make REDME.md better

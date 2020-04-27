@@ -7,6 +7,7 @@ services:
 - samba
 - nginx
 - postfix
+- vsftpd
 
 # warning
 - This plybook has been tested successfully on Redhat base systems like centos and fedora 

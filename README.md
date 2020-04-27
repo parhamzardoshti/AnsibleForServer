@@ -25,5 +25,5 @@ services:
 - [x] write Samba Auto bash script
 - [ ] Test and trouble shoot on Debian systems
 - [ ] Add more services
-- [ ] improve playbook
+- [ ] improve playbooks syntax
 - [x] make REDME.md better

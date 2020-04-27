@@ -9,6 +9,12 @@
       template:
         src: openvpn-install.sh
         dest: /root/openvpn-install.sh
+    - name: remove old openvpn
+      yum: name=openvpn state=absent
+      when: ansible_os_family == "RedHat"
+    - name: remove old openvpn
+      apt: name=openvpn state=absent
+      when: ansible_os_family == "Debian"
     - name: execute openvpn 
       shell: echo -ne "\n" | bash openvpn-install.sh
   roles:

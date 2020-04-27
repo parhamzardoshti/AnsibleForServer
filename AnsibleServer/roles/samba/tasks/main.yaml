@@ -1,0 +1,19 @@
+---
+
+- name: install samba on redhat
+  yum: name=samba state=latest
+  when: ansible_os_family == "RedHat"
+
+- name: install samba on debian
+  apt: name=samba state=latest
+  when: ansible_os_family == "Debain"
+
+- name: cp AutoSamba script to target machine
+  template:
+    src: AutoSamba.sh
+    dest: /root/AutoSamba.sh
+  
+
+- name: execute samba scrpt to add user
+  shell: bash /root/AutoSamba.sh admin 123456789
+  notify: start samba

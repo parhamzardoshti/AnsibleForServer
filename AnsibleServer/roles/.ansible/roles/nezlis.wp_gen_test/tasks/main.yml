@@ -1,0 +1,183 @@
+---
+
+
+
+- name: Install Mysql both server and client with python required packages
+  apt:
+    name: "{{ item }}"
+    state: present
+  loop:
+    - mysql-server
+    - mysql-client
+    - python-mysqldb
+    - python-selinux
+
+- name: Create mysql db for 2 wp-sites
+  mysql_db:
+    name: "{{ item }}"
+    state: present
+  loop:
+    - "{{ wp_mysql_db_1 }}"
+    - "{{ wp_mysql_db_2 }}"
+
+- name: remove the test database
+  mysql_db:
+    name: test
+    state: absent
+
+- name: Create mysql user
+  mysql_user:
+    name: "{{ wp_mysql_user }}"
+    password: "{{ wp_mysql_password }}"
+    priv: '*.*:ALL,GRANT'
+    state: present
+  notify:
+    - restart mysql
+
+- name: Removes anonymous user account for security reasons
+  mysql_user:
+    name: ''
+    state: absent
+  notify:
+    - restart mysql
+
+- name: update mysql root password for all root accounts
+  mysql_user:
+    name: root
+    host: "{{ item }}"
+    password: "{{ mysql_root_db_pass }}"
+  loop:
+   - "{{ ansible_hostname }}"
+   - 127.0.0.1
+   - ::1
+   - localhost
+  when: ansible_hostname != 'localhost'
+  notify:
+    - restart mysql
+
+- name: update mysql root password for all root accounts
+  mysql_user:
+    name: root
+    host: "{{ item }}"
+    password: "{{ mysql_root_db_pass }}"
+  with_items:
+   - 127.0.0.1
+   - ::1
+   - localhost
+  when: ansible_hostname == 'localhost'
+  notify:
+    - restart mysql
+
+- name: Install php required modules
+  apt:
+    name: "{{ item }}"
+    update_cache: yes
+    cache_valid_time: 86400
+    state: present
+  loop:
+    - php-mysql
+    - php-fpm
+    - php-curl
+    - php-gd
+    - php-pear
+    - php-imagick
+    - php-imap
+    - php-mcrypt
+    - php-recode
+    - php-tidy
+    - php-xmlrpc
+
+- name: Install nginx
+  apt:
+    pkg: nginx
+    update_cache: yes
+    state: present
+  ignore_errors: yes
+  notify:
+    - restart nginx
+
+- name: Add the user "{{ user_name }}"
+  user:
+    name: "{{ user_name }}"
+
+- name: Create directory for WP to install
+  file:
+    path: "{{ item }}"
+    state: directory
+    recurse: yes
+    mode: 0755
+    owner: www-data
+    group: www-data
+  loop:
+    - /home/{{ user_name }}/{{ domain_1 }}
+    - /home/{{ user_name }}/{{ domain_2 }}
+
+- name: Extract WP archive
+  unarchive:
+    src: "http://wordpress.org/latest.tar.gz"
+    dest: "{{ item }}"
+    remote_src: yes
+  loop:
+    - /home/{{ user_name }}/{{ domain_1 }}
+    - /home/{{ user_name }}/{{ domain_2 }}
+
+- name: Template a file to /home/{{ user_name }}/{{ domain_1 }}/wordpress/
+  template:
+    src: test1-wp-config.php.j2
+    dest: /home/{{ user_name }}/{{ domain_1 }}/wordpress/wp-config.php
+    owner: www-data
+    group: www-data
+    mode: '0755'
+
+- name: Template a file to /home/{{ user_name }}/{{ domain_2 }}/wordpress/
+  template:
+    src: test2-wp-config.php.j2
+    dest: /home/{{ user_name }}/{{ domain_2 }}/wordpress/wp-config.php
+    owner: www-data
+    group: www-data
+    mode: '0755'
+
+- name: Template a file to /etc/nginx/sites-available/{{ domain_1 }}
+  template:
+    src: wp-genesis-test1.pp.ua.Nginx.j2
+    dest: /etc/nginx/sites-available/{{ domain_1 }}
+    owner: root
+    group: root
+    mode: '0755'
+
+- name: Template a file to /etc/nginx/sites-available/{{ domain_2 }}
+  template:
+    src: wp-genesis-test2.pp.ua.Nginx.j2
+    dest: /etc/nginx/sites-available/{{ domain_2 }}
+    owner: root
+    group: root
+    mode: '0755'
+
+- name: Create a symbolic link for Nginx config1
+  file:
+    src: /etc/nginx/sites-available/{{ domain_1 }}
+    dest: /etc/nginx/sites-enabled/{{ domain_1 }}
+    owner: root
+    group: root
+    state: link
+
+- name: Create a symbolic link for Nginx config2
+  file:
+    src: /etc/nginx/sites-available/{{ domain_2 }}
+    dest: /etc/nginx/sites-enabled/{{ domain_2 }}
+    owner: root
+    group: root
+    state: link
+
+- name: Delete /etc/nginx/sites-available/default
+  file:
+    path: "{{ item }}"
+    state: absent
+  loop:
+    - /etc/nginx/sites-available/default
+    - /etc/nginx/sites-enabled/default
+  notify:
+    - restart nginx
+    - restart php
+
+# tasks file for wpgen

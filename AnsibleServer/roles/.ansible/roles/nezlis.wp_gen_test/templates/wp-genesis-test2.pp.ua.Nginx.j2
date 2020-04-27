@@ -1,0 +1,27 @@
+# Default server configuration
+#
+server {
+	listen 80;
+	listen [::]:80;
+
+	root /home/{{create_user}}/{{wp_domain_2}}/wordpress;
+
+	# Add index.php to the list if you are using PHP
+	index index.php index.html index.htm index.nginx-debian.html;
+
+	server_name {{wp_domain_2}} www.{{wp_domain_2}};
+
+	location / {
+
+		try_files $uri $uri/ =404;
+	}
+
+
+	location ~ \.php$ {
+		include snippets/fastcgi-php.conf;
+
+		fastcgi_pass unix:/run/php/php7.0-fpm.sock;
+
+	}
+
+}

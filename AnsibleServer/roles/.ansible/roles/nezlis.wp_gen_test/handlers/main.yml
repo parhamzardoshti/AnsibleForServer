@@ -1,0 +1,24 @@
+---
+
+- name: restart mysql service
+  service:
+    name: mysql
+    state: restarted
+    enabled: yes
+  listen: restart mysql
+
+- name: restart nginx service
+  service:
+    name: nginx
+    state: restarted
+    enabled: yes
+  listen: restart nginx
+
+- name: restart php service
+  service:
+    name: php7.0-fpm
+    state: restarted
+    enabled: yes
+  listen: restart php
+
+# handlers file for wpgen

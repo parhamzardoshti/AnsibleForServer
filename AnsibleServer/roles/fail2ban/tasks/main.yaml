@@ -1,0 +1,18 @@
+---
+
+- name: install fail2ban on RedHat
+  yum: name=fail2ban state=latest
+  when: ansible_os_family == "RedHat"
+
+- name: install fail2ban on Debian
+  apt: name=fail2ban state=latest
+  when: ansible_os_family == "Debian"
+
+- name: modify etc/fail2ban in target machine
+  shell: cp /etc/fail2ban/fail2ban.conf  /etc/fail2ban/fail2ban.local
+
+- name: copy config file to target machine
+  template:
+    src: jail.local
+    dest: /etc/fail2ban
+  notify: start fail2ban

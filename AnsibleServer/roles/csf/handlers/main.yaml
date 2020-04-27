@@ -1,0 +1,7 @@
+---
+
+- name: start csf
+  service: name=csf enabled=yes state=started 
+
+- name: start lfd
+  service: name=lfd enabled=yes state=started 

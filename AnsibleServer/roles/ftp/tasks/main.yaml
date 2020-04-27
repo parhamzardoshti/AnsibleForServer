@@ -1,0 +1,12 @@
+---
+
+- name: install vsftpd as secure ftp service
+  yum: name=vsftpd state=latest
+  when: ansible_os_family == "RedHat"
+  notify: start vsftpd
+
+- name: install vsftpd as secure ftp service
+  apt: name=vsftpd state=latest
+  when: ansible_os_family == "Debain"
+  notify: start vsftpd
+

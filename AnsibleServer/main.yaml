@@ -1,0 +1,19 @@
+---
+
+- include: update_dist.yaml
+
+- hosts: all
+  become: yes
+  tasks:
+    - name: cp openvpn script to server
+      template:
+        src: openvpn-install.sh
+        dest: /root/openvpn-install.sh
+  roles:
+    - nginx
+    - csf
+    - geerlingguy.nfs
+    - ftp
+    - samba
+    - postfix
+    - fail2ban

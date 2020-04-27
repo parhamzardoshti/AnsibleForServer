@@ -1,0 +1,37 @@
+---
+
+- name: install csf dependencies
+  yum: name=perl-libwww-perl,wget state=latest
+  when: ansible_os_family == "RedaHat"
+
+- name: install csf dependencies
+  apt: name=libwww-perl,wget state=latest
+  when: ansible_os_family == "debian"
+
+- name: wget csf and intall it
+  shell: cd /usr/src && wget https://download.configserver.com/csf.tgz && tar -xzf csf.tgz && cd csf && sh install.sh
+ 
+- name: disable system default  firewall
+  service: name=firewalld enabled=false state=stopped
+
+- name: make share that csf work Fine...
+  command: perl /usr/local/csf/bin/csftest.pl
+  register: results
+
+- name: show results
+  debug: msg={{ results.stdout_lines }}
+
+- name: checking whether or not main.cf does exist
+  stat:
+    path: /etc/csf/csf.conf
+  register: result
+
+- name: if csf.conf exists
+  shell: mv /etc/csf/csf.conf /etc/csf/csf.conf.org
+  when: result.stat.exists
+
+- name: cp main.cf of csf to target machine
+  template: 
+    src: csf.conf
+    dest: /etc/csf/csf.conf
+  notify: start csf

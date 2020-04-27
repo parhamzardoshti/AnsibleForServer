@@ -1,0 +1,14 @@
+---
+- hosts: all
+  remote_user: root
+  become: yes
+  vars:
+    domain_1: 'wp-genesis-test1.com'
+    domain_2: 'wp-genesis-test2.com'
+    user_name: 'spanchbob'
+    wp_mysql_user: 'spanchbob-db'
+    wp_mysql_password: 'supersecretpass'
+    wp_mysql_db_1: 'wp-genesis-test1_db1'
+    wp_mysql_db_2: 'wp-genesis-test2_db2'
+  roles:
+    - nezlis.wp_gen_test

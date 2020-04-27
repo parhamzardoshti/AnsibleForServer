@@ -1,0 +1,15 @@
+---
+
+- name: install postfix just in Redhat Distibutaions
+  yum: name=postfix,cyrus-sasl-plain,mailx state=latest 
+  ignore_errors: true
+
+- name: copy config file to targst machine
+  template: 
+    src: main.cf.j2
+    dest: /etc/postfix/main.cf
+
+- name: execute customize shell
+  script: customize.sh
+  notify: start postfix
+

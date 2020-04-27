@@ -1,0 +1,9 @@
+---
+
+- name: start samba
+  service: name=smb state=started
+  register: result
+
+
+- name: show result
+  debug: msg={{ result.stdout_lines }}

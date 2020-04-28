@@ -12,6 +12,7 @@ services:
 # warning
 - This plybook has been tested successfully on Redhat base systems like centos and fedora 
 - For security reasons you should run this play book as root user
+- Because of using CSF Firewall WE Disable Firewalld on System so Make sure csf works well ... 
 
 ## How to run
 1. Install Ansible in your System 

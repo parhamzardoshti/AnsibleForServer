@@ -20,8 +20,9 @@ services:
 2. Clone the project `https://github.com/parhamzardoshti/AnsibleForServer.git`
 3. `cd AnsibleForServer/roles/samba/tasks && vim main.yaml `then add user and pass as argument for shell script
 4. `cd AnsibleForServer/roles/postfix/tasks/customize.sh` and add your gmailusername and gmail password  for postfix service
-4. `cd AnsibleForServer/roles//geerlingguy.nfs/defaults/ && vim main.yml` (For Example:  nfs_exports: ["/home/shared *(rw,sync,no_root_squash)"] )
-5. Thats all !!:)  now come to AnsibleForServer/ and run play book :   `ansible-playbook main.yaml`
+5. `cd AnsibleForServer/roles//geerlingguy.nfs/defaults/ && vim main.yml` (For Example:  nfs_exports: ["/home/shared *(rw,sync,no_root_squash)"] )
+6. `vim AnsibleForServer/main.yaml` and add your target internet interface in shell modules that runs python scanner script 
+7. Thats all !!:)  now come to AnsibleForServer/ and run play book :   `ansible-playbook main.yaml`
 
 ## TODO
 - [x] Add firewall service 

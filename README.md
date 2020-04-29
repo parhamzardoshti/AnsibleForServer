@@ -29,3 +29,4 @@ services:
 - [ ] Add more services
 - [ ] improve playbooks syntax
 - [x] make REDME.md better
+- [x] add some FinalCheck 

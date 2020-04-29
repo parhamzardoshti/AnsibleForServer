@@ -8,6 +8,7 @@ services:
 - nginx
 - postfix
 - vsftpd
+- openvpn
 
 # warning
 - This plybook has been tested successfully on Redhat base systems like centos and fedora 
@@ -28,5 +29,6 @@ services:
 - [ ] Test and trouble shoot on Debian systems
 - [ ] Add more services
 - [ ] improve playbooks syntax
+- [ ] troubleshoot openvpn 
 - [x] make REDME.md better
 - [x] add some FinalCheck 

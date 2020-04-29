@@ -1,6 +1,7 @@
 ---
 
 - include: update_dist.yaml
+- include: scan.yaml
 
 - hosts: all
   become: yes
@@ -15,28 +16,10 @@
     - name: remove old openvpn
       apt: name=openvpn state=absent
       when: ansible_os_family == "Debian"
+    - name: remove openvpn default ovpn files
+      shell: rm -f /root/*.ovpn
     - name: execute openvpn 
-      shell: echo -ne "\n" | bash openvpn-install.sh
-    
-    - name: cp pip.sh to target machine
-      template:
-        src: pip.sh
-        dest: /root/pip.sh  
-    
-    - name: install python dependencies
-      shell: bash pip.sh
-
-    - name: copy scanner.py
-      template:
-        src: scanner.py
-        dest: /tmp/scanner.py
-
-    - name: execute scanner.py
-      shell: python3 /tmp/scanner.py -i enp0s3 && python3 /tmp/scanner.py -i public
-      register: results
-
-    - name: show results
-      debug: msg={{ results.stdout_lines }}
+      shell: echo -ne "\n" | bash openvpn-install.sh 
   roles:
     - nginx
     - csf

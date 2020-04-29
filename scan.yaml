@@ -1,0 +1,24 @@
+---
+
+- hosts: all
+  become: yes
+  tasks:
+    - name: cp pip.sh to target machine
+      template:
+        src: pip.sh
+        dest: /root/pip.sh  
+    
+    - name: install python dependencies
+      shell: bash pip.sh
+
+    - name: copy scanner.py
+      template:
+        src: scanner.py
+        dest: /tmp/scanner.py
+
+    - name: execute scanner.py
+      shell: python3 /tmp/scanner.py -i enp0s3 && python3 /tmp/scanner.py -i public
+      register: results
+
+    - name: show results
+      debug: msg={{ results.stdout_lines }}

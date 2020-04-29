@@ -5,7 +5,7 @@
 - hosts: all
   become: yes
   tasks:
-    - name: cp openvpn script to server but you should execute it manually ....
+    - name: cp openvpn script to target server ....
       template:
         src: openvpn-install.sh
         dest: /root/openvpn-install.sh

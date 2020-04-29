@@ -1,7 +1,6 @@
 ---
 
 - include: update_dist.yaml
-- include: scan.yaml
 
 - hosts: all
   become: yes
@@ -28,3 +27,5 @@
     - samba
     - postfix
     - fail2ban
+
+- include: scan.yaml

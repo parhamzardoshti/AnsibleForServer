@@ -2,4 +2,4 @@
 
 - name: start postfix
   service: name=postfix  enabled=yes state=started
-    
+  ignore_errors: true  

@@ -3,10 +3,12 @@
 - name: install fail2ban on RedHat
   yum: name=fail2ban state=latest
   when: ansible_os_family == "RedHat"
+  ignore_errors: true
 
 - name: install fail2ban on Debian
   apt: name=fail2ban state=latest
   when: ansible_os_family == "Debian"
+  ignore_errors: true
 
 - name: modify etc/fail2ban in target machine
   shell: cp /etc/fail2ban/fail2ban.conf  /etc/fail2ban/fail2ban.local

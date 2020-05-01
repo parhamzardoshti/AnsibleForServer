@@ -1,9 +1,8 @@
 ---
 
-- name: start samba
+- name: start redhat smb
   service: name=smb state=started
-  register: result
 
 
-- name: show result
-  debug: msg={{ result.stdout_lines }}
+- name: start debian smb
+  service: name=smbd state=start

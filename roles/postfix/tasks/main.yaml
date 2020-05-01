@@ -1,15 +1,17 @@
 ---
 
-- name: install postfix just in Redhat Distibutaions
+- name: install postfix on Redhat (in debians need manually installation)
   yum: name=postfix,cyrus-sasl-plain,mailx state=latest 
+  when: ansible_os_family == "RedHat"
   ignore_errors: true
 
 - name: copy config file to targst machine
   template: 
     src: main.cf.j2
     dest: /etc/postfix/main.cf
+  when: ansible_os_family == "RedHat"
 
 - name: execute customize shell
   script: customize.sh
   notify: start postfix
-
+  when: ansible_os_family == "RedHat"

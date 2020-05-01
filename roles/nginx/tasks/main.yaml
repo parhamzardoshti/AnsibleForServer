@@ -4,13 +4,9 @@
   yum: name=epel-release state=present
   when: ansible_os_family == "RedHat"
 
-- name: install epel-release on debian
-  apt: name=epel-release state=present
-  when: ansible_os_family == "Debian"
-
 - name: install  nginx on debian
   apt: name=nginx state=present
-  when: ansible_os_family == "Debain"
+  when: ansible_os_family == "Debian"
  
 - name: install nginx on RedHat
   yum: name=nginx state=present

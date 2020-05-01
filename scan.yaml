@@ -1,8 +1,20 @@
 ---
 
-- hosts: all
+- hosts: ubuntu
   become: yes
   tasks:
+    - name: install net-tools
+      yum: name=net-tools state=latest
+      when: ansible_os_family == "RedHat"
+
+    - name: install pip3
+      apt: name=python3-pip state=present 
+      when: ansible_os_family == "Debian"
+    - name: install pip3
+      yum: name=python3-pip state=present
+      when: ansible_os_family == "RedHat"
+      ignore_errors: true
+
     - name: cp pip.sh to target machine
       template:
         src: pip.sh

@@ -1,31 +1,31 @@
 ---
 
-- include: update_dist.yaml
+#- import_playbook: update_dist.yaml
 
-- hosts: all
+- hosts: ubuntu
   become: yes
-  tasks:
-    - name: cp openvpn script to target server ....
-      template:
-        src: openvpn-install.sh
-        dest: /root/openvpn-install.sh
-    - name: remove old openvpn
-      yum: name=openvpn state=absent
-      when: ansible_os_family == "RedHat"
-    - name: remove old openvpn
-      apt: name=openvpn state=absent
-      when: ansible_os_family == "Debian"
-    - name: remove openvpn default ovpn files
-      shell: rm -f /root/*.ovpn
-    - name: execute openvpn 
-      shell: echo -ne "\n" | bash openvpn-install.sh 
+#  tasks:
+#    - name: cp openvpn script to target server ....
+#      template:
+#        src: openvpn-install.sh
+#        dest: /root/openvpn-install.sh
+#    - name: remove old openvpn
+#      yum: name=openvpn state=absent
+#      when: ansible_os_family == "RedHat"
+#    - name: remove old openvpn
+#      apt: name=openvpn state=absent
+#      when: ansible_os_family == "Debian"
+#    - name: remove openvpn default ovpn files
+#      shell: rm -f /root/*.ovpn
+#    - name: execute openvpn 
+#      shell: echo -ne "\n" | bash openvpn-install.sh 
   roles:
-    - nginx
-    - csf
-    - geerlingguy.nfs
-    - ftp
-    - samba
+#    - nginx
+#    - csf
+#    - geerlingguy.nfs
+#    - ftp
+#    - samba
     - postfix
-    - fail2ban
+#    - fail2ban
 
-- include: scan.yaml
+- import_playbook: scan.yaml

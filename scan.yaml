@@ -1,6 +1,6 @@
 ---
 
-- hosts: ubuntu
+- hosts: all
   become: yes
   tasks:
     - name: install net-tools

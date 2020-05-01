@@ -11,9 +11,9 @@ services:
 - openvpn
 
 # warning
-- This plybook has been tested successfully on Redhat base systems like centos and fedora 
 - For security reasons you should run this play book as root user
-- Because of using CSF Firewall WE Disable Firewalld on System so Make sure csf works well ... 
+- Because of using CSF Firewall We Disable Firewalld on System so Make sure csf works well ... 
+- in most cases you dont need to install all of these services so comment some of them that you dont want to install on your server 
 
 ## How to run
 1. Install Ansible in your System 
@@ -27,9 +27,10 @@ services:
 ## TODO
 - [x] Add firewall service 
 - [x] write Samba Auto bash script
-- [ ] Test and trouble shoot on Debian systems
+- [x] Test and trouble shoot on Debian systems
 - [ ] Add more services
 - [ ] improve playbooks syntax
 - [ ] troubleshoot openvpn 
 - [x] make REDME.md better
-- [x] add some FinalCheck 
+- [x] add some FinalCheck
+- [ ] install postfix on debians 

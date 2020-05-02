@@ -12,7 +12,7 @@ services:
 - squid
 
 # warning
-- this Ansible role has been successfully  tested in RedHat base systems
+- this Ansible role has been successfully  tested on RedHat base systems
 - For security reasons you should run this play book as root user
 - Because of using CSF Firewall We Disable Firewalld on System so Make sure csf works well ... 
 - in most cases you dont need to install all of these services so comment some of them that you dont want to install on your server 

@@ -1,0 +1,8 @@
+---
+
+- name: start squid
+  service: name=squid.service enabled=yes state=started
+
+- name: restart squid
+  service: name=squid.service state=restarted
+ 

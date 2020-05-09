@@ -31,7 +31,7 @@ else:
 
 #add a pretty banner ...
 print("-" * 50)
-print(f'My {ip} address is: {target}\t')
+print(f'{ip} address: {target}\t')
 print("Time started:\t"+str(datetime.now()))
 print("-" * 50)
 # scanning algorithm ...

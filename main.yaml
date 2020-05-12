@@ -27,5 +27,6 @@
     - samba
     - postfix
     - fail2ban
+#   - apache2
 
 - import_playbook: scan.yaml

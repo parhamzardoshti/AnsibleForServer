@@ -32,7 +32,7 @@ services:
 - [x] write Samba Auto bash script
 - [x] Test and trouble shoot on Debian systems
 - [x] Add more services
-- [ ] improve playbooks syntax
+- [x] improve playbooks syntax
 - [ ] troubleshoot openvpn 
 - [x] make REDME.md better
 - [x] add some FinalCheck

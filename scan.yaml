@@ -29,7 +29,7 @@
         dest: /tmp/scanner.py
 
     - name: execute scanner.py
-      shell: python3 /tmp/scanner.py -i enp0s3 && python3 /tmp/scanner.py -i public
+      shell: python3 /tmp/scanner.py -i {{  interface }}  && python3 /tmp/scanner.py -i public
       register: results
 
     - name: show results

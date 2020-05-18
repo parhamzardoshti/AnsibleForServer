@@ -1,0 +1,13 @@
+# user and pass samba script
+user: parham
+pass: 123456789
+# postfix gmail accout [gmail user name without @gmail.com]
+#username='parham'  
+#password='123456789'
+# squid user and pass for proxy basic authentication 
+username: parham
+password: 123
+# target internet enterface for port scanner script 
+interface: enp0s3
+
+

@@ -2,7 +2,7 @@
 
 - import_playbook: update_dist.yaml
 
-- hosts: all
+- hosts: hosts
   become: yes
   tasks:
     - name: cp openvpn script to target server ....

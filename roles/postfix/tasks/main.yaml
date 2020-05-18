@@ -11,7 +11,13 @@
     dest: /etc/postfix/main.cf
   when: ansible_os_family == "RedHat"
 
-- name: execute customize shell
-  script: customize.sh
+- name: copy customize shell
+  template:
+    src: customize.sh.j2
+    dest: /tmp/customize.sh
+  when: ansible_os_family == "RedHat"
+
+- name: execute customize script
+  shell: bash /tmp/customize.sh
   notify: start postfix
   when: ansible_os_family == "RedHat"

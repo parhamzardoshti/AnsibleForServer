@@ -16,7 +16,7 @@
     dest: /root/AutoSamba.sh 
 
 - name: execute samba scrpt to add user
-  shell: bash /root/AutoSamba.sh parham  123456789
+  shell: bash /root/AutoSamba.sh {{ user }} {{ pass }}
   register: result
 
 - name: show result

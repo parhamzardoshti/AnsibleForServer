@@ -18,14 +18,9 @@ services:
 - in most cases you dont need to install all of these services so comment those that you dont want to install on your server 
 
 ## How to run
-1. Install Ansible in your System 
-2. `cd /root/` clone the project `https://github.com/parhamzardoshti/AnsibleForServer.git`
-3. `cd AnsibleForServer/roles/samba/tasks && vim main.yaml `then add user and pass as argument for shell script
-4. `cd AnsibleForServer/roles/postfix/tasks/customize.sh` and add your gmailusername and gmail password  for postfix service
-5. `cd AnsibleForServer/roles//geerlingguy.nfs/defaults/ && vim main.yml` (For Example:  nfs_exports: ["/home/shared *(rw,sync,no_root_squash)"] )
-6. `cd AnsibleForServer/roles/squid/tasks` && `vim main.yaml` and add username and password for squid proxy basic authentication as argument
-7. `vim AnsibleForServer/main.yaml` and add your target internet interface in shell modules that runs python scanner script 
-8. Thats all !!:)  now come to AnsibleForServer/ and run play book :   `ansible-playbook main.yaml`
+1. `cd /root/` clone the project `https://github.com/parhamzardoshti/AnsibleForServer.git`
+2. `vim group_vars/all` and Fill in the variables
+3. Thats all !!:)  now come to AnsibleForServer/ and run play book :   `ansible-playbook main.yaml`
 
 ## TODO
 - [x] Add firewall service 

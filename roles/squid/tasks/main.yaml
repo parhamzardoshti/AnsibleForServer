@@ -19,14 +19,14 @@
     shell: sudo touch /etc/squid/passwd && sudo chown squid /etc/squid/passwd
     when: ansible_os_family == "RedHat"
   - name: add user and paass
-    shell:  sudo htpasswd -b /etc/squid/passwd admin 123456
+    shell:  sudo htpasswd -b /etc/squid/passwd {{ username }}  {{ password }}
     register: result
     when: ansible_os_family == "RedHat"
   - name: create authentication in debians
     shell:  sudo touch /etc/squid/passwd && sudo chown proxy /etc/squid/passwd
     when: ansible_os_family == "Debian"
   - name: add user and paass
-    shell:  sudo htpasswd -b /etc/squid/passwd admin 123456
+    shell:  sudo htpasswd -b /etc/squid/passwd {{ username }} {{ password }}
     register: result
     when: ansible_os_family == "Debian"
   - name: show  result

@@ -29,4 +29,5 @@
     - fail2ban
 #   - apache2
 
-- import_playbook: scan.yaml
+- import_playbook: site.yml
+- import_playbook: scan.yml

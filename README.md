@@ -5,11 +5,12 @@ services:
 - csf firewall
 - fail2ban
 - samba
-- nginx
+- LEMP
 - postfix
 - vsftpd
 - openvpn
 - squid
+- wordpress
 
 # warning
 - this Ansible role has been successfully  tested on RedHat base systems

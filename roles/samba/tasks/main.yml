@@ -11,7 +11,7 @@
   notify: start debian smb
 
 - name: cp AutoSamba script to target machine
-  template:
+  copy:
     src: AutoSamba.sh
     dest: /root/AutoSamba.sh 
 

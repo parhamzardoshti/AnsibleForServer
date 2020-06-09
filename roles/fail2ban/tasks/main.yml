@@ -11,7 +11,9 @@
   ignore_errors: true
 
 - name: modify etc/fail2ban in target machine
-  shell: cp /etc/fail2ban/fail2ban.conf  /etc/fail2ban/fail2ban.local
+  copy:
+    src: /etc/fail2ban/fail2ban.conf
+    dest: /etc/fail2ban/fail2ban.local
 
 - name: copy config file to target machine
   template:

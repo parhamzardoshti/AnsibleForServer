@@ -10,21 +10,24 @@
     - name: install pip3
       apt: name=python3-pip state=present 
       when: ansible_os_family == "Debian"
+      ignore_errors: true
+
+    
     - name: install pip3
       yum: name=python3-pip state=present
       when: ansible_os_family == "RedHat"
       ignore_errors: true
 
-    - name: cp pip.sh to target machine
-      template:
-        src: pip.sh
-        dest: /root/pip.sh  
-    
-    - name: install python dependencies
-      shell: bash pip.sh
+    - pip:
+        name: sockets
+        name: DateTime
+        name: DateTime
+        name: requests
+        name: netifaces 
+        executable: pip-3 
 
     - name: copy scanner.py
-      template:
+      copy:
         src: scanner.py
         dest: /tmp/scanner.py
 

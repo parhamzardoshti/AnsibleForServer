@@ -3,32 +3,48 @@
   - name: install squid and dependencies
     yum: name=squid,httpd-tools state=latest
     when: ansible_os_family == "RedHat"
+
   - name: install squid and dependencies 
     apt: name=squid,apache2-utils state=latest
     when: ansible_os_family == "Debian"
+
   - name: copy config file
     template:
       src: squid.conf.j2
       dest: /etc/squid/squid.conf
+
   - name: copy block list file
     template:
       src: blocked_sites
       dest: /etc/squid/blocked_sites
     notify: start squid
+
   - name: create authentication in redhats 
-    shell: sudo touch /etc/squid/passwd && sudo chown squid /etc/squid/passwd
+    file:
+      path: /etc/squid/passwd
+      state: touch
+      owner: squid
+      group: squid
     when: ansible_os_family == "RedHat"
+
   - name: add user and paass
     shell:  sudo htpasswd -b /etc/squid/passwd {{ username }}  {{ password }}
     register: result
     when: ansible_os_family == "RedHat"
+
   - name: create authentication in debians
-    shell:  sudo touch /etc/squid/passwd && sudo chown proxy /etc/squid/passwd
+    file:
+      path: /etc/squid/passwd
+      state: touch
+      group: proxy
+      owner: proxy
     when: ansible_os_family == "Debian"
+
   - name: add user and paass
     shell:  sudo htpasswd -b /etc/squid/passwd {{ username }} {{ password }}
     register: result
     when: ansible_os_family == "Debian"
+
   - name: show  result
     debug: msg={{ result }}
     notify: restart squid

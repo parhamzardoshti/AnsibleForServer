@@ -1,16 +1,17 @@
 # AnsibleForServer
 Ansible Playbook for install and config famous server services in Linux Operating Systems
-services:
-- nfs
-- csf firewall
+
+- NFS 
+- Git 
+- CSF firewall
 - fail2ban
 - samba
-- LEMP
+- LEMP (mariadb, php-fpm, nginx)
 - postfix
 - vsftpd
-- openvpn
-- squid
+- squid proxy server
 - wordpress
+- apache2
 
 # warning
 - this Ansible role has been successfully  tested on RedHat base systems
@@ -28,8 +29,8 @@ services:
 - [x] write Samba Auto bash script
 - [x] Test and trouble shoot on Debian systems
 - [x] Add more services
-- [x] improve playbooks syntax
-- [ ] troubleshoot openvpn 
+- [x] improve playbooks syntax 
 - [x] make REDME.md better
 - [x] add some FinalCheck
 - [ ] trouble shoot squid and postfix on debians 
+

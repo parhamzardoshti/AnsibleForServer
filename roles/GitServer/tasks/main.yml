@@ -1,0 +1,62 @@
+---
+
+- name: install apache2 services 
+  yum: name=httpd state=present update_cache=yes
+  when: ansible_os_family == "RedHat"
+  notify: start httpd
+# installing git via repo 
+#
+#    - name: add opensource.wandisco.com  repo 
+#      yum_repository:
+#        name: wandisco
+#        description: install wandiscop repository for get the newest updates
+#        baseurl: http://opensource.wandisco.com/centos/7/git/x86_64/wandisco-git-release-7-2.noarch.rpm
+
+#    - name: install new version of the git
+#      yum: name=git state=latest update_cache=yes
+
+- name: cp bash script
+  copy:
+    src: gitInstall.sh
+    dest: /root/gitInstall.sh
+    
+- name: compile and install  git from source code 
+  shell: bash gitInstall.sh
+  register: result
+
+- name: show result
+  debug: msg={{ result }}
+    
+- name: check version of the git
+  command: git  --version
+  register: git_result
+
+- name: show git_result
+  debug: masg={{ git_result.stdout_lines }}
+
+
+- name: Create vhosts directory
+  file: path=/etc/httpd/vhosts/ state=directory
+    
+- name: copy bash script to /root target
+  copy:
+    src: gitServer.sh
+    dest: /root/gitServer.sh
+     
+- name: cp httpd config file for create git server over http
+  template:
+    src: httpd.conf.j2
+    dest: /etc/httpd/conf/httpd.conf
+  notify: start httpd
+
+- name: cp mygit.conf
+  template:
+    src: mygit.conf.j2
+    dest: /etc/httpd/vhosts/mygit.conf
+  notify: start httpd
+
+- name:  execute bash script
+  shell: bash /root/gitServer.sh {{ my_project }}  
+  notify: restart httpd
+  
+

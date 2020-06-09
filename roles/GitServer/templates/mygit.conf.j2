@@ -1,0 +1,16 @@
+<VirtualHost *:80>    
+     ServerAdmin sayahi@anisa.net    
+     ServerName git.anisa.net
+SetEnv GIT_PROJECT_ROOT /srv/git
+SetEnv GIT_HTTP_EXPORT_ALL
+ScriptAlias /git/ /usr/libexec/git-core/git-http-backend/
+<LocationMatch "^/git/.*$">  
+     Require all denied  
+     AuthType Basic  
+     AuthName "Restricted Content"  
+     AuthUserFile /opt/pass  
+     Require valid-user
+</LocationMatch>
+RewriteCond %{REQUEST_URI} /git-receive-pack$
+RewriteRule ^/git/ - [E=AUTHREQUIRED:yes]
+</VirtualHost>

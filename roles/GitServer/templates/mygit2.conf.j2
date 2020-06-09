@@ -1,0 +1,26 @@
+<VirtualHost *:80>
+ServerAdmin sayahi@anisa.net
+ServerName git.anisa.net
+SetEnv GIT_PROJECT_ROOT /srv/git
+SetEnv GIT_HTTP_EXPORT_ALL
+ScriptAlias /git/ /usr/libexec/git-core/git-http-backend/
+<Directory /usr/share/git-core/>
+AllowOverride None
+Options None
+Require all granted
+</Directory>
+RewriteCond %{REQUEST_URI} /git-receive-pack$
+RewriteRule ^/git/ - [E=AUTHREQUIRED:yes]
+<LocationMatch "^/git/testrepo/.*$">
+AuthType Basic
+AuthName "sayahi"
+AuthBasicProvider ldap
+AuthLDAPBindAuthoritative off
+AuthLDAPURL
+"ldap://172.20.x.x/OU=anisa,DC=anisa;DC=net?sAMACcountName?sub?(objectClass=*)"
+AuthLDAPBindDN "git@anisa.net"
+AuthLDAPBindPassword 123456
+Include /opt/authorized-users.txt
+</LocationMatch>
+</VirtualHost>
+LDAPVerifyServerCert off

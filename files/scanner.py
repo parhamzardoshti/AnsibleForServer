@@ -1,6 +1,4 @@
 #!/bin/python3
-## 
-###
 #######
 #### python script for scanning open ports
 ###### written by parham zardoshti 

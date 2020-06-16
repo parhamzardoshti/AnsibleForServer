@@ -2,7 +2,7 @@
 
 - import_playbook: update_dist.yml
 
-- hosts: hosts
+- hosts: {{ hosts }}
   remote_user: root
   roles:
 #    - GitServer

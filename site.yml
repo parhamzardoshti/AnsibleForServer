@@ -1,6 +1,6 @@
 ---
 - name: Install WordPress, MariaDB, Nginx, and PHP-FPM
-  hosts: parham
+  hosts: {{ hosts }}
   remote_user: root
   # remote_user: user
   # sudo: yes

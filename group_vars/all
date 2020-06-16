@@ -1,5 +1,7 @@
 ---
 
+# server or servers
+hosts: all
 
 # git server address /srv/git/my_project
 # you can clone it locally for test: git clone http://127.0.0.1/git/my_project

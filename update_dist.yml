@@ -1,6 +1,6 @@
 ---
 
-- hosts: all
+- hosts: {{ hosts }}
   become: yes
   tasks:
     - name: update debian systems

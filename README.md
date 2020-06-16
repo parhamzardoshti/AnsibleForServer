@@ -22,7 +22,7 @@ Ansible Playbook for install and config famous server services in Linux Operatin
 ## How to run
 1. `cd /root/` clone the project `https://github.com/parhamzardoshti/AnsibleForServer.git`
 2. `vim group_vars/all` and Fill in the variables
-3. Thats all !!:)  now come to AnsibleForServer/ and run play book :   `ansible-playbook main.yaml`
+3. Thats all !!:)  now come to AnsibleForServer/ and run play book :   `ansible-playbook main.yml`
 
 ## TODO
 - [x] Add firewall service 

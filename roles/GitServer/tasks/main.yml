@@ -26,14 +26,6 @@
 
 - name: show result
   debug: msg={{ result }}
-    
-- name: check version of the git
-  command: git  --version
-  register: git_result
-
-- name: show git_result
-  debug: masg={{ git_result.stdout_lines }}
-
 
 - name: Create vhosts directory
   file: path=/etc/httpd/vhosts/ state=directory

@@ -3,16 +3,16 @@
 # server or servers
 hosts: all
 
-# git server address /srv/git/my_project
-# you can clone it locally for test: git clone http://127.0.0.1/git/my_project
+# git server address /srv/git/my_project 
+# you can clone it locally for test: git clone http://127.0.0.1:8080/git/my_project
 my_project: my_project
 # user and pass samba script
 user: parham
 pass: 123456789
 
 # postfix gmail accout [gmail user name without @gmail.com]
-#username='parham'  
-#password='123456789'
+username: parham  
+password: 123456789
 
 # squid user and pass for proxy basic authentication 
 username: parham

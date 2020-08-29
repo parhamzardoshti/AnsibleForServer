@@ -1,9 +1,0 @@
----
-
-- name: start apache2 on redhat
-  service: name=httpd state=started
-  when: ansible_os_family == "RedHat"
-
-- name: start apache2 on debian
-  service: name=apache2 state=started
-  when: ansible_os_family == "Debian"

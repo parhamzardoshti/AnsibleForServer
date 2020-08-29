@@ -5,7 +5,6 @@
 - hosts: {{ hosts }}
   remote_user: root
   roles:
-#    - GitServer
     - nginx
     - csf
     - geerlingguy.nfs
@@ -13,7 +12,7 @@
     - samba
     - postfix
     - fail2ban
-#   - apache2
+    - wordpress
 
 - import_playbook: site.yml
 - import_playbook: scan.yml

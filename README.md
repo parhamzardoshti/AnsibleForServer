@@ -2,7 +2,6 @@
 Ansible Playbook for install and config famous server services in Linux Operating Systems
 
 - NFS 
-- Git 
 - CSF firewall
 - fail2ban
 - samba
@@ -11,7 +10,6 @@ Ansible Playbook for install and config famous server services in Linux Operatin
 - vsftpd
 - squid proxy server
 - wordpress
-- apache2
 
 # warning
 - this Ansible role has been successfully  tested on RedHat base systems
@@ -29,7 +27,7 @@ Ansible Playbook for install and config famous server services in Linux Operatin
 - [x] write Samba Auto bash script
 - [x] Test and trouble shoot on Debian systems
 - [x] Add more services
-- [x] improve playbooks syntax 
+- [ ] improve playbooks syntax 
 - [x] make REDME.md better
 - [x] add some FinalCheck
 - [ ] trouble shoot squid and postfix on debians 
